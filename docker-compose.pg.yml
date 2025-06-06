@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8081:80"
+    depends_on:
+      - pg
+    environment:
+      DB_TYPE: pgsql
+      DB_HOST: pg
+      DB_NAME: produits
+      DB_USER: postgres
+      DB_PASS: root
+    networks:
+      - produitspg
+
+  pg:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: produits
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+    - ./init:/docker-entrypoint-initdb.d
+    networks:
+      - produitspg
+
+volumes:
+  pgdata:
+
+networks:
+  produitspg:

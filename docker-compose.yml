@@ -7,9 +7,12 @@ services:
       - "8080:80"
     depends_on:
       - db
-    # Décommente cette ligne plus tard si tu veux du hot-reload
-    # volumes:
-    #   - ./php/www:/var/www/html
+    environment:
+      DB_TYPE: mysql
+      DB_HOST: db
+      DB_NAME: produits
+      DB_USER: root
+      DB_PASS: root
     networks:
       - produits
 

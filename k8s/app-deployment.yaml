@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: php-apache
+          image: gestion-produits-app:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_TYPE
+              value: "pgsql" 
+            - name: DB_HOST
+              value: "pg"
+            - name: DB_NAME
+              value: "produits"
+            - name: DB_USER
+              value: "postgres"
+            - name: DB_PASS
+              value: "root"
