@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: php-apache
-          image: gestion-produits-app:latest
+          image: mqwen/gestion-produits-app:latest
           ports:
             - containerPort: 80
           env:
