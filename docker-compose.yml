@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    # Décommente cette ligne plus tard si tu veux du hot-reload
+    # volumes:
+    #   - ./php/www:/var/www/html
+    networks:
+      - produits
+
+  db:
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: produits
+    networks:
+      - produits
+
+networks:
+  produits:
