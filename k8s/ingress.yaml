@@ -3,37 +3,32 @@ kind: Ingress
 metadata:
   name: produits-ingress
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   ingressClassName: traefik
+  tls:
+    - hosts:
+        - www.prod-gestion-produits.fr
+      secretName: tls-secret
   rules:
-  - host: produits.local
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: app-service
-              port:
-                number: 80
-  - host: www.prod-gestion-produits.fr
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: app-service
-              port:
-                number: 80
-  - host: www.dev-gestion-produits.fr
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: app-service
-              port:
-                number: 80
+    - host: www.prod-gestion-produits.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app-service
+                port:
+                  number: 80
+    - host: www.dev-gestion-produits.fr
+    
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app-service
+                port:
+                  number: 80
