@@ -22,7 +22,6 @@ spec:
                 port:
                   number: 80
     - host: www.dev-gestion-produits.fr
-    
       http:
         paths:
           - path: /
